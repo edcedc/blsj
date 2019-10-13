@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/include_top"/>
+
+    <LinearLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_pwd"
+                android:text="@string/uptada_pwd"
+                android:background="?actionBarItemBackground"
+                android:padding="@dimen/px30"
+                android:layout_width="match_parent"
+                android:drawableRight="@mipmap/my_icon_return"
+                style="@style/Tv15black"/>
+
+        <View
+                style="@style/divider_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_phone"
+                android:text="@string/uptada_phone"
+                android:background="?actionBarItemBackground"
+                android:padding="@dimen/px30"
+                android:layout_width="match_parent"
+                android:drawableRight="@mipmap/my_icon_return"
+                style="@style/Tv15black"/>
+
+        <View
+                style="@style/divider_2"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_problems"
+                android:text="@string/common_problems"
+                android:background="?actionBarItemBackground"
+                android:padding="@dimen/px30"
+                android:layout_width="match_parent"
+                android:drawableRight="@mipmap/my_icon_return"
+                style="@style/Tv15black"/>
+
+        <View
+                style="@style/divider_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_suggestion"
+                android:text="@string/suggestion"
+                android:background="?actionBarItemBackground"
+                android:padding="@dimen/px30"
+                android:layout_width="match_parent"
+                android:drawableRight="@mipmap/my_icon_return"
+                style="@style/Tv15black"/>
+
+        <View
+                style="@style/divider_1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_about"
+                android:text="@string/about_us"
+                android:background="?actionBarItemBackground"
+                android:padding="@dimen/px30"
+                android:layout_width="match_parent"
+                android:drawableRight="@mipmap/my_icon_return"
+                style="@style/Tv15black"/>
+
+        <View
+                style="@style/divider_2"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_out"
+                android:text="@string/log_out"
+                android:background="?actionBarItemBackground"
+                android:padding="@dimen/px30"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                style="@style/Tv15red"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

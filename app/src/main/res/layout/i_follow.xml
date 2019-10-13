@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        android:padding="@dimen/px30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_head"
+            android:src="@drawable/no_banner"
+            android:scaleType="fitXY"
+            android:layout_width="55dp"
+            android:layout_height="55dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            app:layout_constraintLeft_toRightOf="@id/iv_head"
+            android:layout_marginLeft="@dimen/px30"
+            app:layout_constraintTop_toTopOf="@id/iv_head"
+            app:layout_constraintBottom_toBottomOf="@id/iv_head"
+            style="@style/Tv15black"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_text"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_head"
+            app:layout_constraintBottom_toBottomOf="@id/iv_head"
+            android:text="@string/cal_follow"
+            style="@style/Tv15red"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

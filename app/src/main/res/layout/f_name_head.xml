@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/include_top"/>
+
+    <LinearLayout
+            android:layout_marginTop="@dimen/px100"
+            android:layout_marginLeft="@dimen/px130"
+            android:layout_marginRight="@dimen/px130"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:text="@string/yyc_1"
+                    style="@style/Tv12red"/>
+
+        <com.flyco.roundview.RoundFrameLayout
+                android:layout_marginTop="@dimen/px20"
+                app:rv_cornerRadius="@dimen/px10"
+                android:layout_width="match_parent"
+                app:rv_backgroundColor="@color/white_F2F2F3"
+                android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_name"
+                    android:hint="@string/yyc_3"
+                    android:maxLength="12"
+                    android:textSize="@dimen/size24"
+                    android:layout_width="match_parent"
+                    android:background="@null"
+                    android:padding="@dimen/px20"
+                    android:layout_height="wrap_content"/>
+
+        </com.flyco.roundview.RoundFrameLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginTop="@dimen/px30"
+                android:text="@string/yyc_2"
+                style="@style/Tv12red"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/px30"
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never" />
+
+        <com.flyco.roundview.RoundTextView
+                android:id="@+id/bt_sure"
+                android:text="@string/sure"
+                app:rv_cornerRadius="@dimen/px10"
+                android:layout_marginTop="@dimen/px100"
+                app:rv_backgroundColor="@color/red_FF5A60"
+                app:rv_backgroundPressColor="@color/white_f4f4f4"
+                style="@style/roundTextView"/>
+
+    </LinearLayout>
+
+</LinearLayout>

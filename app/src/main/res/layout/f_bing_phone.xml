@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/include_top"/>
+
+    <LinearLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginLeft="@dimen/px30"
+                android:text="@string/phone"
+                style="@style/Tv15black"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_phone"
+                android:background="@null"
+                android:padding="@dimen/px30"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:hint="@string/yyc_8"
+                android:textSize="@dimen/size30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <View
+           style="@style/divider_1"/>
+
+    <LinearLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginLeft="@dimen/px30"
+                android:text="@string/code"
+                style="@style/Tv15black"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_code"
+                android:background="@null"
+                android:padding="@dimen/px30"
+                android:inputType="phone"
+                android:hint="@string/please_code1"
+                android:textSize="@dimen/size30"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+        <com.flyco.roundview.RoundTextView
+                android:id="@+id/tv_code"
+                android:ems="6"
+                app:rv_backgroundColor="@color/red_FF5A60"
+                android:text="点击获取"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size24"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    <com.flyco.roundview.RoundTextView
+            android:id="@+id/bt_sure"
+            app:rv_backgroundColor="@color/red_FF5A60"
+            app:rv_backgroundPressColor="@color/white_f4f4f4"
+            android:text="@string/sure"
+            style="@style/roundTextView"/>
+
+</LinearLayout>

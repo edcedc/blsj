@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        android:padding="@dimen/px30"
+        android:background="?actionBarItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_time"
+            android:text="time"
+            style="@style/Tv15black"/>
+
+    <FrameLayout
+            android:id="@+id/fy_release"
+            android:layout_width="75dp"
+            android:layout_marginLeft="@dimen/px30"
+            app:layout_constraintLeft_toRightOf="@id/tv_time"
+            android:background="@color/gray_999999"
+            android:layout_height="75dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:background="@mipmap/f10"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+    <View
+            android:id="@+id/v1"
+            app:layout_constraintTop_toBottomOf="@id/fy_release"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+
+    <androidx.constraintlayout.widget.Group
+            android:id="@+id/gp_rele"
+            android:visibility="gone"
+            app:constraint_referenced_ids="v1, fy_release"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_img"
+            app:layout_constraintTop_toBottomOf="@id/v1"
+            android:layout_marginLeft="@dimen/px30"
+            app:layout_constraintLeft_toRightOf="@id/tv_time"
+            android:src="@drawable/no_banner"
+            android:scaleType="centerCrop"
+            android:layout_width="75dp"
+            android:layout_height="75dp"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_play"
+            android:src="@mipmap/b50"
+            app:layout_constraintTop_toTopOf="@id/iv_img"
+            app:layout_constraintBottom_toBottomOf="@id/iv_img"
+            app:layout_constraintLeft_toLeftOf="@id/iv_img"
+            app:layout_constraintRight_toRightOf="@id/iv_img"
+            android:scaleType="centerCrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:maxLength="3"
+            android:ellipsize="end"
+            app:layout_constraintLeft_toRightOf="@id/iv_img"
+            app:layout_constraintTop_toTopOf="@id/iv_img"
+            android:layout_marginLeft="@dimen/px30"
+            style="@style/Tv15black"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_content"
+            app:layout_constraintBottom_toBottomOf="@id/iv_img"
+            app:layout_constraintLeft_toRightOf="@id/iv_img"
+            android:layout_marginLeft="@dimen/px30"
+            style="@style/Tv12gray"/>
+
+    <LinearLayout
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/v1"
+            app:layout_constraintLeft_toRightOf="@id/tv_time"
+            android:id="@+id/ly_url"
+            android:layout_marginLeft="@dimen/px30"
+            android:layout_marginTop="@dimen/px20"
+            android:background="@color/white_f4f4f4"
+            android:padding="@dimen/px20"
+            android:layout_width="0dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_url_img"
+                android:src="@drawable/no_banner"
+                android:layout_width="@dimen/px84"
+                android:layout_height="@dimen/px84"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_url_title"
+                android:layout_marginLeft="@dimen/px20"
+                android:layout_gravity="left|center"
+                android:textColor="@color/black_121212"
+                style="@style/Tv12gray"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

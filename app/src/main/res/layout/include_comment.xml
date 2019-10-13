@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:padding="@dimen/px20"
+        android:background="@color/white_F7F8F8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <com.flyco.roundview.RoundFrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_text"
+                android:background="@color/white"
+                android:focusable="false"
+                android:imeOptions="actionSend"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:longClickable="false"
+                android:cursorVisible="false"
+                android:hint="@string/yyc_5"
+                android:padding="@dimen/px20"
+                android:textSize="@dimen/size24"
+                android:textColor="@color/gray_999999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </com.flyco.roundview.RoundFrameLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_send"
+            android:text="@string/send"
+            android:padding="@dimen/px20"
+            style="@style/Tv15gray"/>
+
+</LinearLayout>
+

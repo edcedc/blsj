@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+
+        tools:ignore="MissingConstraints"
+        android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_img"
+            android:scaleType="fitXY"
+            android:src="@drawable/no_banner"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_head"
+            android:scaleType="fitXY"
+            android:src="@mipmap/place_holder_user"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/px150"
+            android:layout_marginLeft="@dimen/px60"
+            android:layout_width="75dp"
+            android:layout_height="75dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            android:layout_marginTop="@dimen/px20"
+            app:layout_constraintLeft_toLeftOf="@id/iv_head"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/iv_head"
+            style="@style/Tv12gray"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_nick"
+            android:layout_marginTop="@dimen/px20"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="@id/iv_head"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            style="@style/Tv12gray"/>
+
+    <FrameLayout
+            android:id="@+id/fy_close"
+            app:layout_constraintTop_toTopOf="@id/tv_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_nick"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+               android:layout_margin="@dimen/px30"
+                android:layout_width="wrap_content"
+                android:background="@mipmap/door"
+                android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_dynamic"
+            android:text="@string/me_cirle"
+            android:padding="@dimen/px30"
+            android:drawablePadding="@dimen/px30"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:drawableRight="@mipmap/my_icon_return"
+            android:drawableLeft="@mipmap/g02"
+            app:layout_constraintTop_toBottomOf="@id/iv_img"
+            style="@style/Tv15black"/>
+
+    <View
+            android:id="@+id/v1"
+            app:layout_constraintTop_toBottomOf="@id/tv_dynamic"
+            style="@style/divider_1"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_follow"
+            android:text="@string/me_follow"
+            android:padding="@dimen/px30"
+            android:drawablePadding="@dimen/px30"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:drawableRight="@mipmap/my_icon_return"
+            android:drawableLeft="@mipmap/g03"
+            app:layout_constraintTop_toBottomOf="@id/v1"
+            style="@style/Tv15black"/>
+
+    <View
+            android:id="@+id/v2"
+            app:layout_constraintTop_toBottomOf="@id/tv_follow"
+            style="@style/divider_1"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_set"
+            android:text="@string/me_set"
+            android:padding="@dimen/px30"
+            android:drawablePadding="@dimen/px30"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:drawableRight="@mipmap/my_icon_return"
+            android:drawableLeft="@mipmap/g05"
+            app:layout_constraintTop_toBottomOf="@id/v2"
+            style="@style/Tv15black"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
