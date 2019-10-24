@@ -21,6 +21,8 @@ class DataBean : Serializable {
     var circle_id: String? = null
     var type: Int = 0
     var nick: String? = null
+    var location: String? = null
+    var brief: String? = null
     var signature: String? = null
     var url: String? = null
     var byUserId: String? = null

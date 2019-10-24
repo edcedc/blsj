@@ -93,6 +93,8 @@ class HomepageFrg : BaseFragment(), HomepageContract.View {
         GlideLoadingUtils.loadRounded(act, CloudApi.SERVLET_IMG_URL + userExtend?.head, iv_head)
         GlideLoadingUtils.load(act, CloudApi.SERVLET_IMG_URL + userExtend?.background, iv_img)
         tv_name.text = userExtend?.nick
+        tv_content.text = userExtend?.signature
+        tv_address.text = userExtend?.brief
     }
 
     override fun setOnRightClickListener() {

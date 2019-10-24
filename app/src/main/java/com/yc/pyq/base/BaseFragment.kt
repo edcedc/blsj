@@ -46,7 +46,7 @@ abstract class BaseFragment: SwipeBackFragment(){
 
     internal var act: Activity? = null
 
-    private var rootView: View? = null
+     var rootView: View? = null
 
     protected var pagerNumber = 1//网络请求默认第一页
 
@@ -59,7 +59,7 @@ abstract class BaseFragment: SwipeBackFragment(){
             bundle = Bundle()
         }
         initParms(bundle)
-        mLayoutStatusView = rootView.findViewById<MultipleStatusView>(R.id.multipleStatusView)
+        mLayoutStatusView = rootView.findViewById(R.id.multipleStatusView)
         return attachToSwipeBack(rootView)
     }
 

@@ -27,7 +27,8 @@ interface UserUpdateContract {
             background: ArrayList<LocalMedia>?,
             head: ArrayList<LocalMedia>?,
             nick: String?,
-            signature: String?
+            signature: String?,
+            address: String
         )
 
     }

@@ -1,6 +1,7 @@
 package com.hazz.kotlinmvp.net
 
 import android.util.Log
+import com.blankj.utilcode.util.LogUtils
 import com.hazz.kotlinmvp.api.ApiService
 import com.yc.pyq.controller.CloudApi
 import com.yc.pyq.mar.MyApplication
@@ -16,6 +17,7 @@ import java.util.concurrent.TimeUnit
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import org.json.JSONObject
 import java.util.logging.Level
 
 /**
@@ -109,8 +111,11 @@ object RetrofitManager {
     private fun getOkHttpClient(): OkHttpClient {
         //添加一个log拦截器,打印所有的log
         val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message ->
-            //            LogUtils.e("", message)
+
             Log.e("自己打印的", message)
+
+//            val `data` = JSONObject(message)
+//            LogUtils.e(data.optInt("code"))
         })
         //可以设置请求过滤的水平,body,basic,headers
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY

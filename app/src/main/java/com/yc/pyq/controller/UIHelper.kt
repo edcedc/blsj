@@ -202,6 +202,16 @@ class UIHelper private constructor() {
             root.start(frg)
         }
 
+        /**
+         *  视频页面
+         */
+        fun startVideoAct(video: String, image: String) {
+            var bundle = Bundle()
+            bundle.putString("video", video)
+            bundle.putString("image", image)
+            ActivityUtils.startActivity(bundle, VideoAct::class.java)
+        }
+
     }
 
 }

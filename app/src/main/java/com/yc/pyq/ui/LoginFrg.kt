@@ -65,7 +65,7 @@ class LoginFrg : BaseFragment(),LoginContract.View, View.OnClickListener{
     }
 
     override fun setNameHead(nick: String) {
-        if (nick.equals("null")){
+        if (nick.equals("null") || StringUtils.isEmpty(nick)){
             UIHelper.startNameHeadFrg(this)
         }else{
             UIHelper.startMainAct()

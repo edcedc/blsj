@@ -81,6 +81,12 @@
             android:theme="@style/AppTheme.NoActionBar.SwipeBack"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".ui.act.VideoAct"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar.SwipeBack"
+            android:screenOrientation="portrait"/>
+
         <!--<activity-->
             <!--android:name=".ui.NameHeadFrg"-->
             <!--android:resizeableActivity="true"-->

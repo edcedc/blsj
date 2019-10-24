@@ -3,7 +3,6 @@ package com.yc.pyq.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.blankj.utilcode.util.LogUtils
 import com.bumptech.glide.Glide
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
@@ -15,11 +14,10 @@ import com.yc.pyq.base.User
 import com.yc.pyq.controller.CloudApi
 import com.yc.pyq.mvp.impl.UserUpdateContract
 import com.yc.pyq.mvp.presenter.UserUptatePresenter
-import com.yc.pyq.utils.AndroidBug5497Workaround
+import com.yc.pyq.utils.DatePickerUtils
 import com.yc.pyq.utils.PictureSelectorTool
 import com.yc.pyq.utils.PopupWindowTool
 import com.yc.pyq.weight.GlideLoadingUtils
-import kotlinx.android.synthetic.main.f_three.*
 import kotlinx.android.synthetic.main.f_update_user.*
 import kotlinx.android.synthetic.main.f_update_user.iv_head
 import kotlinx.android.synthetic.main.f_update_user.iv_img
@@ -54,6 +52,7 @@ class UpdateUserFrg : BaseFragment(), UserUpdateContract.View, View.OnClickListe
         mPresenter.init(this, act)
         iv_img.setOnClickListener(this)
         iv_head.setOnClickListener(this)
+        tv_address.setOnClickListener(this)
         EventBus.getDefault().register(this)
         val userObj = User.getInstance().userObj
         GlideLoadingUtils.loadRounded(act, CloudApi.SERVLET_IMG_URL + userObj.optString("head"), iv_head)
@@ -92,6 +91,9 @@ class UpdateUserFrg : BaseFragment(), UserUpdateContract.View, View.OnClickListe
                     }
                 }, null, false).bindLayout(R.layout.p_dialog).show()
             }
+            R.id.tv_address -> {
+                DatePickerUtils.onAddressPicker(act, { add -> tv_address.setText(add) })
+            }
         }
     }
 
@@ -102,10 +104,10 @@ class UpdateUserFrg : BaseFragment(), UserUpdateContract.View, View.OnClickListe
         val path = localMediaList[0].compressPath
         if (type == 1) {
             Glide.with(this).load(path).into(iv_img)
-            mPresenter.onUptate(localMediaList, null, null, null)
+            mPresenter.onUptate(localMediaList, null, null, null, tv_address.text.toString())
         } else {
             Glide.with(this).load(path).into(iv_head)
-            mPresenter.onUptate(null, localMediaList, null, null)
+            mPresenter.onUptate(null, localMediaList, null, null, tv_address.text.toString())
         }
     }
 
@@ -115,7 +117,7 @@ class UpdateUserFrg : BaseFragment(), UserUpdateContract.View, View.OnClickListe
 
     override fun setOnRightClickListener() {
         super.setOnRightClickListener()
-        mPresenter.onUptate(null, null, et_name.text.toString(), et_nick.text.toString())
+        mPresenter.onUptate(null, null, et_name.text.toString(), et_nick.text.toString(), tv_address.text.toString())
     }
 
     override fun onDestroy() {

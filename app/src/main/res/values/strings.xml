@@ -29,6 +29,7 @@
     <string name="report" translatable="false">举报</string>
     <string name="nick" translatable="false">昵称：</string>
     <string name="signature" translatable="false">个性签名：</string>
+    <string name="address" translatable="false">选择地区：</string>
 
     <string name="yyc_4" translatable="false">圈子</string>
     <string name="me_follow" translatable="false">我的关注</string>

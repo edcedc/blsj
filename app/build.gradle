@@ -38,7 +38,7 @@ android {
         // 实现毛玻璃那种透明的效果需要添加的库
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true    // Enable RS support
-
+        multiDexEnabled true
         ndk {
             //APP的build.gradle设置支持的SO库架构
             abiFilters 'armeabi', 'armeabi-v7a', 'x86'
@@ -61,18 +61,13 @@ android {
             zipAlignEnabled true
             // 移除无用的resource文件
             shrinkResources true
-            android.applicationVariants.all { variant ->
-                variant.outputs.all {
-                    outputFileName = "pyq_${defaultConfig.versionName}_${releaseTime()}.apk"
-                }
-            }
         }
     }
 
     // 自定义输出配置
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "pyq_${variant.versionName}_${variant.name}.apk"
+            outputFileName = "pyq_${variant.versionName}_${variant.name}_${releaseTime()}.apk"
         }
     }
 
@@ -178,6 +173,15 @@ dependencies {
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.4'
     // 权限
     implementation 'com.yanzhenjie.permission:x:2.0.1'
+    //选中时间控件
+    implementation 'com.github.addappcn:android-pickers:1.0.3'
+    //跟上面一起选择地址要
+    implementation 'com.alibaba:fastjson:1.1.56.android'
+    //完整版引入
+    implementation 'com.shuyu:gsyVideoPlayer-java:6.0.3'
+    //更多ijk的编码支持
+    implementation 'com.shuyu:gsyVideoPlayer-ex_so:6.0.3'
+
 
     //加载视图
     implementation project(':multiple-status-view')

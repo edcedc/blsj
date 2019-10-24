@@ -41,7 +41,7 @@ class LoginPresenter : BasePresenter<LoginContract.View>(),LoginContract.Present
                                 User.getInstance().isLogin = true
                                 ShareSessionIdCache.getInstance(Utils.getApp()).save(user.optString("sessionId"))
                                 SharedAccount.getInstance(Utils.getApp()).save(phone, pwd)
-                                mRootView?.setNameHead(data.optString("nick"))
+                                mRootView?.setNameHead(userExtend.optString("nick"))
                             }
                         }else{
                             mRootView?.setError()

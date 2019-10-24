@@ -41,7 +41,6 @@ abstract class BaseActivity : SwipeBackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         setContentView(getLayoutId())
         act = this
         // 初始化参数

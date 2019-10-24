@@ -110,11 +110,12 @@ class CirlceAdapter(act: Context, root: BaseFragment, listBean: List<DataBean>) 
             UIHelper.startHtmlAct(HtmlAct.DESC, bean.url)
         }
         fy_video.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW)
-            LogUtils.e(CloudApi.SERVLET_IMG_URL + bean.video_url)
-            val data = Uri.parse(CloudApi.SERVLET_IMG_URL + bean.video_url)
-            intent.setDataAndType(data, "video/mp4")
-            act.startActivity(intent)
+//            val intent = Intent(Intent.ACTION_VIEW)
+//            LogUtils.e(CloudApi.SERVLET_IMG_URL + bean.video_url)
+//            val data = Uri.parse(CloudApi.SERVLET_IMG_URL + bean.video_url)
+//            intent.setDataAndType(data, "video/mp4")
+//            act.startActivity(intent)
+            UIHelper.startVideoAct(CloudApi.SERVLET_IMG_URL + bean.video_url, CloudApi.SERVLET_IMG_URL + bean.video_image)
         }
 
         val isPraise = bean.isPraise
@@ -162,6 +163,5 @@ class CirlceAdapter(act: Context, root: BaseFragment, listBean: List<DataBean>) 
     fun setOnClickListener(listener: OnClickListener) {
         this.listener = listener
     }
-
 
 }

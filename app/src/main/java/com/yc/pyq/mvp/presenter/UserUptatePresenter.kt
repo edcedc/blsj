@@ -26,7 +26,13 @@ import java.util.HashMap
  */
 class UserUptatePresenter : BasePresenter<UserUpdateContract.View>(), UserUpdateContract.Presenter {
 
-    override fun onUptate(background: ArrayList<LocalMedia>?, head: ArrayList<LocalMedia>?, nick: String?, signature: String?) {
+    override fun onUptate(
+        background: ArrayList<LocalMedia>?,
+        head: ArrayList<LocalMedia>?,
+        nick: String?,
+        signature: String?,
+        address: String
+    ) {
         val map = HashMap<String, RequestBody>()
         if (background != null && background.size != 0){
             val create = RequestBody.create(MediaType.parse("image/png"), File(background[0].compressPath))
@@ -43,6 +49,9 @@ class UserUptatePresenter : BasePresenter<UserUpdateContract.View>(), UserUpdate
         }
         if (!StringUtils.isEmpty(signature)){
             map?.put("signature", toRequestBody(signature as String))
+        }
+        if (!StringUtils.isEmpty(address)){
+            map?.put("brief", toRequestBody(address))
         }
         mRootView?.showLoading()
         val disposable = RetrofitManager.service.userUpdate(map)

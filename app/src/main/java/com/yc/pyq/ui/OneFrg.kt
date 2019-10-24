@@ -18,6 +18,7 @@ import com.yc.pyq.mvp.impl.OneContract
 import com.yc.pyq.mvp.presenter.OnePresenter
 import com.yc.pyq.weight.GlideImageLoader
 import com.yc.pyq.weight.LinearDividerItemDecoration
+import com.youth.banner.BannerConfig
 import com.youth.banner.listener.OnBannerListener
 import com.youth.banner.transformer.DefaultTransformer
 import kotlinx.android.synthetic.main.f_one.*
@@ -55,7 +56,7 @@ class OneFrg : BaseFragment(), OneContract.View, OnBannerListener, View.OnClickL
     }
 
     override fun initView(rootView: View) {
-        setTitleCenter(getString(com.yc.pyq.R.string.yyc_4), R.mipmap.b01)
+        setTitleCenter(getString(R.string.yyc_4), R.mipmap.b01)
         setSwipeBackEnable(false)
         mPresenter.init(this, act)
         mPresenter.onBanner()
@@ -100,7 +101,15 @@ class OneFrg : BaseFragment(), OneContract.View, OnBannerListener, View.OnClickL
     override fun setBanner(list: List<DataBean>) {
         listBannerBean.clear()
         listBannerBean.addAll(list)
+        banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE)
+        val list1 = ArrayList<String>()
+        val imgs = ArrayList<String>()
+        for (bean in listBannerBean) {
+            imgs.add(bean.image.toString())
+            list1.add(bean.name.toString())
+        }
         banner.setImages(listBannerBean)
+            .setBannerTitles(list1)
             .setImageLoader(GlideImageLoader())
             .setOnBannerListener(this)
             .setBannerAnimation(DefaultTransformer::class.java)
@@ -117,9 +126,9 @@ class OneFrg : BaseFragment(), OneContract.View, OnBannerListener, View.OnClickL
         var isPraise = bean.isPraise
         if (isPraise == null){
             isPraise = DataBean()
-            isPraise.state = 2
+            isPraise.state = praise
             bean.isPraise = isPraise
-            if (praise == 1){
+            if (praise == 0){
                 bean.praise += 1
             }else{
                 bean.tread += 1
