@@ -9,11 +9,13 @@ import com.blankj.utilcode.util.LogUtils
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.tencent.bugly.proguard.ad
+import com.yc.mema.event.CameraInEvent
 import com.yc.pyq.R
 import com.yc.pyq.adapter.CirlceAdapter
 import com.yc.pyq.base.BaseFragment
 import com.yc.pyq.bean.DataBean
 import com.yc.pyq.controller.UIHelper
+import com.yc.pyq.event.CirlePraiseInEvent
 import com.yc.pyq.mvp.impl.OneContract
 import com.yc.pyq.mvp.presenter.OnePresenter
 import com.yc.pyq.weight.GlideImageLoader
@@ -22,6 +24,8 @@ import com.youth.banner.BannerConfig
 import com.youth.banner.listener.OnBannerListener
 import com.youth.banner.transformer.DefaultTransformer
 import kotlinx.android.synthetic.main.f_one.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import java.util.ArrayList
 
 
@@ -33,13 +37,6 @@ import java.util.ArrayList
  * Time: 11:09
  */
 class OneFrg : BaseFragment(), OneContract.View, OnBannerListener, View.OnClickListener{
-
-    fun newInstance(): OneFrg {
-        val args = Bundle()
-        val fragment = OneFrg()
-        fragment.arguments = args
-        return fragment
-    }
 
      val mPresenter by lazy { OnePresenter() }
 
@@ -59,7 +56,6 @@ class OneFrg : BaseFragment(), OneContract.View, OnBannerListener, View.OnClickL
         setTitleCenter(getString(R.string.yyc_4), R.mipmap.b01)
         setSwipeBackEnable(false)
         mPresenter.init(this, act)
-        mPresenter.onBanner()
 
         setRecyclerViewType(recyclerView = recyclerView)
         recyclerView.addItemDecoration(LinearDividerItemDecoration(act, DividerItemDecoration.VERTICAL, 2))
@@ -76,18 +72,20 @@ class OneFrg : BaseFragment(), OneContract.View, OnBannerListener, View.OnClickL
         refreshLayout?.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener{
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 pagerNumber = 1
-                mPresenter.onRequest(pagerNumber)
+                mPresenter.onBanner()
+                mPresenter.onRequest(page = pagerNumber)
             }
 
             override fun onLoadMore(refreshLayout: RefreshLayout) {
                 pagerNumber += 1
-                mPresenter.onRequest(pagerNumber)
+                mPresenter.onRequest(page = pagerNumber)
             }
         })
+        EventBus.getDefault().register(this)
     }
 
     override fun setData(objects: Object) {
-        val list = objects as List<DataBean>
+        var list = objects as List<DataBean>
         if (pagerNumber == 1){
             listBean.clear()
         }
@@ -96,7 +94,6 @@ class OneFrg : BaseFragment(), OneContract.View, OnBannerListener, View.OnClickL
         refreshLayout.finishRefresh()
         refreshLayout.finishLoadMore()
     }
-
 
     override fun setBanner(list: List<DataBean>) {
         listBannerBean.clear()
@@ -165,6 +162,22 @@ class OneFrg : BaseFragment(), OneContract.View, OnBannerListener, View.OnClickL
     override fun setOnRightClickListener() {
         super.setOnRightClickListener()
         UIHelper.startReleaseAct()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe
+    fun onMainCirlePraiseInEvent(event: CirlePraiseInEvent) {
+        for (i in 0..listBean.size) {
+            var  bean = listBean[i]
+            if (bean?.id.equals(event.id)){
+                setSavePraise(i, event.praise)
+                break
+            }
+        }
     }
 
 }

@@ -38,7 +38,7 @@ class ReleasePresenter : BasePresenter<ReleaseContract.View>(), ReleaseContract.
                     if (bean.code == ErrorStatus.SUCCESS){
                         val data = bean.data
                         if (data?.title != null){
-                            mRootView?.setDow(data)
+                            mRootView?.setDow(data?.title)
                         }else{
                             showToast("识别出错，请重新选择URL")
                         }

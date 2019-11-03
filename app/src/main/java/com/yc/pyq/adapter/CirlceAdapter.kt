@@ -7,8 +7,12 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -16,6 +20,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.blankj.utilcode.util.EncodeUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.StringUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.hazz.kotlinmvp.view.recyclerview.adapter.BaseRecyclerviewAdapter
 import com.yc.pyq.R
 import com.yc.pyq.adapter.base.ViewHolder
@@ -29,6 +34,8 @@ import com.yc.pyq.utils.TimeUtil
 import com.yc.pyq.weight.GlideLoadingUtils
 import com.yc.pyq.weight.NineGridTestLayout
 import com.yc.pyq.weight.RoundImageView
+import com.yc.pyq.weight.X5WebView
+import kotlinx.android.synthetic.main.a_html.*
 
 /**
  * Created by Android Studio.
@@ -53,25 +60,34 @@ class CirlceAdapter(act: Context, root: BaseFragment, listBean: List<DataBean>) 
         var tv_zan = viewHolder.getView<AppCompatTextView>(R.id.tv_zan)
         var tv_cai = viewHolder.getView<AppCompatTextView>(R.id.tv_cai)
         var ly_adv = viewHolder.getView<ConstraintLayout>(R.id.ly_adv)
+        var ly_web = viewHolder.getView<LinearLayout>(R.id.ly_web)
         val nineGridTestLayout = viewHolder.getView<NineGridTestLayout>(R.id.layout_nine_grid)
+        val progressBar = viewHolder.getView<ProgressBar>(R.id.progressBar)
+        val webView = viewHolder.getView<X5WebView>(R.id.webView)
         nineGridTestLayout.setIsShowAll(true)
         viewHolder.setText(R.id.tv_name, bean.nick as String)
         GlideLoadingUtils.load(act, CloudApi.SERVLET_IMG_URL + bean.head, viewHolder.getView(R.id.iv_head), true)
         val remark = bean.emoji_remark
         tv_content.visibility = (if (StringUtils.isEmpty(remark)) View.GONE else View.VISIBLE)
         tv_content.text =  String(EncodeUtils.base64Decode(remark))
-        viewHolder.setText(R.id.tv_comment, bean.comment_number)
         viewHolder.setText(R.id.tv_time, TimeUtil.getTimeFormatText(bean.create_time))
         tv_zan.text = bean.praise.toString()
         tv_cai.text = bean.tread.toString()
+        viewHolder.setText(R.id.tv_browse, "游览量" + bean?.browse)
+
+        var pageCommentsLowerLevel = bean.pageCommentsLowerLevel
+        if (pageCommentsLowerLevel != null){
+            viewHolder.setText(R.id.tv_comment, pageCommentsLowerLevel.totalRow)
+        }
 
         when(bean.type){
             1 ->{
                 ly_url.visibility = View.VISIBLE
-                GlideLoadingUtils.load(act, CloudApi.SERVLET_IMG_URL + bean.image, viewHolder.getView<AppCompatImageView>(R.id.iv_img))
+                GlideLoadingUtils.loadRounded(act, CloudApi.SERVLET_IMG_URL + bean.image, viewHolder.getView<AppCompatImageView>(R.id.iv_img))
                 viewHolder.setText(R.id.tv_title, bean.title)
                 fy_video.visibility = View.GONE
                 nineGridTestLayout.visibility = View.GONE
+                ly_web.visibility = View.GONE
             }
             2 ->{
                 nineGridTestLayout.visibility = View.VISIBLE
@@ -87,6 +103,7 @@ class CirlceAdapter(act: Context, root: BaseFragment, listBean: List<DataBean>) 
                 }
                 ly_url.visibility = View.GONE
                 fy_video.visibility = View.GONE
+                ly_web.visibility = View.GONE
             }
             3 ->{
                 fy_video.visibility = View.VISIBLE
@@ -94,11 +111,43 @@ class CirlceAdapter(act: Context, root: BaseFragment, listBean: List<DataBean>) 
                 viewHolder.getView<AppCompatImageView>(R.id.iv_play).visibility = View.VISIBLE
                 ly_url.visibility = View.GONE
                 nineGridTestLayout.visibility = View.GONE
+                ly_web.visibility = View.GONE
             }
             4 ->{
                 ly_url.visibility = View.GONE
                 fy_video.visibility = View.GONE
                 nineGridTestLayout.visibility = View.GONE
+                ly_web.visibility = View.GONE
+            }
+            5 ->{
+                ly_url.visibility = View.GONE
+                fy_video.visibility = View.GONE
+                nineGridTestLayout.visibility = View.GONE
+                ly_web.visibility = View.VISIBLE
+                webView.loadUrl(bean?.url)
+                webView.setWebViewClient(object : WebViewClient() {
+                    override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                        view.loadUrl(url)
+                        LogUtils.e(url)
+                        return true
+                    }
+
+                    override fun onReceivedError(var1: WebView, var2: Int, var3: String, var4: String) {
+                        progressBar.setVisibility(View.GONE)
+                        ToastUtils.showShort("网页加载失败")
+                    }
+                })
+                //进度条
+                webView.setWebChromeClient(object : WebChromeClient() {
+                    override fun onProgressChanged(view: WebView, newProgress: Int) {
+                        if (newProgress == 100) {
+                            progressBar.setVisibility(View.GONE)
+                            return
+                        }
+                        progressBar.setVisibility(View.VISIBLE)
+                        progressBar.setProgress(newProgress)
+                    }
+                })
             }
         }
 
@@ -106,9 +155,6 @@ class CirlceAdapter(act: Context, root: BaseFragment, listBean: List<DataBean>) 
             UIHelper.startHomepageFrg(root, if (bean.user_id.equals(User.getInstance().userId)) null else bean.user_id)
         }
 
-        ly_url.setOnClickListener {
-            UIHelper.startHtmlAct(HtmlAct.DESC, bean.url)
-        }
         fy_video.setOnClickListener {
 //            val intent = Intent(Intent.ACTION_VIEW)
 //            LogUtils.e(CloudApi.SERVLET_IMG_URL + bean.video_url)
@@ -137,7 +183,12 @@ class CirlceAdapter(act: Context, root: BaseFragment, listBean: List<DataBean>) 
             if (isPraise != null && isPraise.state == 1)return@setOnClickListener
             listener?.onZan(position, bean.id as String, 1)
         })
-        viewHolder.itemView.setOnClickListener({UIHelper.startCirleDescAct(bean)})
+        viewHolder.itemView.setOnClickListener({
+            if (bean.type == 1){
+                bean.type = 5
+            }
+            UIHelper.startCirleDescAct(bean)
+        })
 
         val adv = bean.adv
         if (adv != null){

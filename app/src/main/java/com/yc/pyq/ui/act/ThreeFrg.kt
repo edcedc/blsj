@@ -18,13 +18,6 @@ import kotlinx.android.synthetic.main.f_three.*
  */
 class ThreeFrg : BaseFragment(), View.OnClickListener{
 
-    fun newInstance(): ThreeFrg {
-        val args = Bundle()
-        val fragment = ThreeFrg()
-        fragment.arguments = args
-        return fragment
-    }
-
     override fun getLayoutId(): Int = R.layout.f_three
 
     override fun initParms(bundle: Bundle) {

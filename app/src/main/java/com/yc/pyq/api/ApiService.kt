@@ -10,6 +10,7 @@ import io.reactivex.Observable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.http.*
 import java.util.*
 
@@ -83,7 +84,7 @@ interface ApiService{
     fun circleCommentSave(@Query("circleId") circleId : String? = null, @Query("content") content : String? = null, @Query("emojiContent") emojiContent : String = EncodeUtils.base64Encode2String(content?.toByteArray()), @Query("sessionId") sessionId : String = ShareSessionIdCache.getInstance(Utils.getApp()).sessionId): Observable<BaseResponseBean<DataBean>>
      //关于我们-简介
     @GET("information/introduction")
-    fun informationIntroduction(): Observable<BaseResponseBean<DataBean>>
+    fun informationIntroduction(): Observable<ResponseBody>
     //发布二级评论
     @GET("circle/comment/saveLevel")
     fun circleCommentSaveLevel(

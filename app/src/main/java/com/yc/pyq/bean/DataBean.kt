@@ -20,6 +20,7 @@ class DataBean : Serializable {
     var parent_id: String? = null
     var circle_id: String? = null
     var type: Int = 0
+    var position: Int = 0
     var nick: String? = null
     var location: String? = null
     var brief: String? = null
@@ -34,15 +35,18 @@ class DataBean : Serializable {
     var image: String? = null
     var video_image: String? = null
     var video_url: String? = null
+    var browse: Int? = null
     var tread: Int = 0
     var comment_number: Int = 0
     var praise: Int = 0
     var state: Int = 0
+    var totalRow: Int = 0
     var id: String? = null
     val imageList: List<DataBean>? = null
     var isPraise: DataBean? = null
     var adv: DataBean? = null
     var userExtend: DataBean? = null
-    var introduction: DataBean? = null
+    var pageCommentsLowerLevel: DataBean? = null
+    var introduction: String? = null
 
 }

@@ -7,6 +7,7 @@ import com.hazz.kotlinmvp.net.exception.ExceptionHandle
 import com.hazz.kotlinmvp.rx.scheduler.SchedulerUtils
 import com.yc.pyq.base.User
 import com.yc.pyq.mvp.impl.AboutContract
+import org.json.JSONObject
 
 /**
  * Created by Android Studio.
@@ -19,12 +20,14 @@ class AboutPresenter : BasePresenter<AboutContract.View>(), AboutContract.Presen
     override fun onIntroduction() {
         val disposable = RetrofitManager.service.informationIntroduction()
             .compose(SchedulerUtils.ioToMain())
-            .subscribe({ bean ->
+            .subscribe({ json ->
                 mRootView?.apply {
                     mRootView?.hideLoading()
-                    if (bean.code == ErrorStatus.SUCCESS){
-                        val introduction = bean.data?.introduction
-                        mRootView?.setUrl(introduction?.content)
+                    val bean = JSONObject(json.string())
+                    if (bean.optInt("code") == ErrorStatus.SUCCESS){
+                        var  data = bean.optJSONObject("data");
+                        val introduction = data.optJSONObject("introduction")
+                        mRootView?.setUrl(introduction.optString("content"))
                     }
                 }
             }, { t ->

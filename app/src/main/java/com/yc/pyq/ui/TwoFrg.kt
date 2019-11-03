@@ -11,11 +11,14 @@ import com.yc.pyq.R
 import com.yc.pyq.adapter.CirlceAdapter
 import com.yc.pyq.base.BaseFragment
 import com.yc.pyq.bean.DataBean
+import com.yc.pyq.event.CirlePraiseInEvent
 import com.yc.pyq.mvp.impl.OneContract
 import com.yc.pyq.mvp.presenter.OnePresenter
 import com.yc.pyq.weight.LinearDividerItemDecoration
 import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.f_one.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import java.util.ArrayList
 
 /**
@@ -25,14 +28,6 @@ import java.util.ArrayList
  * Time: 11:09
  */
 class TwoFrg : BaseFragment(), OneContract.View, OnBannerListener, View.OnClickListener{
-
-
-    fun newInstance(): TwoFrg {
-        val args = Bundle()
-        val fragment = TwoFrg()
-        fragment.arguments = args
-        return fragment
-    }
 
      val mPresenter by lazy { OnePresenter() }
 
@@ -74,6 +69,7 @@ class TwoFrg : BaseFragment(), OneContract.View, OnBannerListener, View.OnClickL
                 mPresenter.onPageFocus(pagerNumber)
             }
         })
+        EventBus.getDefault().register(this)
     }
 
     override fun setData(objects: Object) {
@@ -133,5 +129,20 @@ class TwoFrg : BaseFragment(), OneContract.View, OnBannerListener, View.OnClickL
         super.setRefreshLayoutMode(listBean.size, totalRow, refreshLayout)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe
+    fun onMainCirlePraiseInEvent(event: CirlePraiseInEvent) {
+        for (i in 0..listBean.size) {
+            var  bean = listBean[i]
+            if (bean?.id.equals(event.id)){
+                setSavePraise(i, event.praise)
+                break
+            }
+        }
+    }
 
 }

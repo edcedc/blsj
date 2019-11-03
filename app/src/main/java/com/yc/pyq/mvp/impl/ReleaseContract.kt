@@ -15,7 +15,7 @@ import java.util.ArrayList
 interface ReleaseContract {
 
     interface View : IBaseView {
-        fun setDow(bean: DataBean?)
+        fun setDow(title: String?)
     }
 
     interface Presenter: IPresenter<View> {

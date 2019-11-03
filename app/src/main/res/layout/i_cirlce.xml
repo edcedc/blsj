@@ -57,26 +57,27 @@
             android:visibility="gone"
             android:layout_marginTop="@dimen/px20"
             app:layout_constraintTop_toBottomOf="@id/layout_nine_grid"
-            android:background="@color/white_f4f4f4"
-            android:padding="@dimen/px20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_img"
-                android:src="@drawable/no_banner"
-                android:layout_width="@dimen/px84"
-                android:layout_height="@dimen/px84"/>
-
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_title"
-                android:layout_marginLeft="@dimen/px20"
-                android:layout_gravity="left|center"
+                android:layout_weight="1"
+                android:layout_marginRight="@dimen/px20"
                 android:textColor="@color/black_121212"
                 style="@style/Tv12gray"/>
 
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_img"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_banner"
+                android:layout_width="100dp"
+                android:layout_height="100dp"/>
+
     </LinearLayout>
+
+
 
     <FrameLayout
             android:visibility="gone"
@@ -102,11 +103,43 @@
 
     </FrameLayout>
 
+    <LinearLayout
+            android:id="@+id/ly_web"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/px10"
+            app:layout_constraintTop_toBottomOf="@+id/fy_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:max="100"
+                android:progress="0"/>
+
+        <com.yc.pyq.weight.X5WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_time"
-            android:text="xxxx"
             android:layout_marginTop="@dimen/px10"
-            app:layout_constraintTop_toBottomOf="@id/fy_video"
+            app:layout_constraintTop_toBottomOf="@id/ly_web"
+            style="@style/Tv12gray"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_browse"
+            android:text="游览量0"
+            app:layout_constraintLeft_toRightOf="@id/tv_time"
+            android:layout_marginLeft="@dimen/px20"
+            app:layout_constraintTop_toTopOf="@id/tv_time"
+            app:layout_constraintBottom_toBottomOf="@id/tv_time"
             style="@style/Tv12gray"/>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -150,6 +183,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_report"
+            android:visibility="invisible"
             app:layout_constraintTop_toTopOf="@id/tv_comment"
             app:layout_constraintBottom_toBottomOf="@id/tv_comment"
             app:layout_constraintRight_toRightOf="parent"

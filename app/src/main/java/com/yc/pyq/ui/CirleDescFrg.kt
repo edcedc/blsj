@@ -12,11 +12,13 @@ import com.yc.pyq.adapter.CirlceAdapter
 import com.yc.pyq.adapter.CommentAdapter
 import com.yc.pyq.base.BaseFragment
 import com.yc.pyq.bean.DataBean
+import com.yc.pyq.event.CirlePraiseInEvent
 import com.yc.pyq.mvp.impl.CirleDescContract
 import com.yc.pyq.mvp.presenter.CirleDescPresenter
 import com.yc.pyq.ui.bottom.CommentBottomFrg
 import kotlinx.android.synthetic.main.f_cirle_desc.*
 import kotlinx.android.synthetic.main.include_comment.*
+import org.greenrobot.eventbus.EventBus
 import java.util.ArrayList
 
 /**
@@ -69,7 +71,7 @@ class CirleDescFrg : BaseFragment(), CirleDescContract.View, View.OnClickListene
         cirlceAdapter?.setOnClickListener(object : CirlceAdapter.OnClickListener{
             override fun onZan(position: Int, circleId: String, isPraise: Int) {
                 LogUtils.e(isPraise)
-                mPresenter.onSsavePraise(position, circleId, isPraise)
+                mPresenter.onSsavePraise(0, circleId, isPraise)
             }
         })
 
@@ -152,15 +154,29 @@ class CirleDescFrg : BaseFragment(), CirleDescContract.View, View.OnClickListene
     }
 
     override fun setSavePraise(position: Int, praise: Int) {
-        val bean = listCirlceBean[position]
+        var  bean = listCirlceBean.get(position)
         var isPraise = bean.isPraise
         if (isPraise == null){
             isPraise = DataBean()
-            isPraise.state = 2
+            isPraise.state = praise
             bean.isPraise = isPraise
+            if (praise == 0){
+                bean.praise += 1
+            }else{
+                bean.tread += 1
+            }
+        }else{
+            if (praise == 1){
+                bean.praise = if (bean.praise == 0) 0 else bean.praise - 1
+                bean.tread += 1
+            }else{
+                bean.praise += 1
+                bean.tread = if (bean.tread == 0) 0 else bean.tread - 1
+            }
         }
         isPraise?.state = praise
-        cirlceAdapter?.notifyItemChanged(position)
+        cirlceAdapter?.notifyDataSetChanged()
+        EventBus.getDefault().post(CirlePraiseInEvent(praise, bean?.id))
     }
 
     override fun setFirstSend(position: Int, data: DataBean?) {

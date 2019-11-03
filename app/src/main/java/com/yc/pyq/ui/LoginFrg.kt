@@ -20,10 +20,11 @@ import kotlinx.android.synthetic.main.f_login.bt_sure
  *  登录
  */
 class LoginFrg : BaseFragment(),LoginContract.View, View.OnClickListener{
+
     override fun setError() {
     }
 
-    private val mPresenter by lazy { LoginPresenter() }
+     val mPresenter by lazy { LoginPresenter() }
 
     fun newInstance(): LoginFrg {
         val args = Bundle()

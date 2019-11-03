@@ -71,7 +71,8 @@ public class GlideLoadingUtils {
         //设置图片圆角角度
         RoundedCorners roundedCorners= new RoundedCorners(6);
         //通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
-        RequestOptions options=RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
+        RequestOptions options= RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
+        options.placeholder(R.drawable.no_banner);
         Glide.with(act).load(url).apply(options).into(imageView);
     }
 

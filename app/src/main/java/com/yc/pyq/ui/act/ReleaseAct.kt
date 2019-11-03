@@ -114,11 +114,11 @@ class ReleaseAct : BaseActivity(), ReleaseContract.View, View.OnClickListener{
         mPresenter.onRelease(type, et_text.text.toString(), localMediaList, url)
     }
 
-    override fun setDow(bean: DataBean?) {
+    override fun setDow(title: String?) {
         type = 1
         recyclerView.visibility = View.GONE
         fy_url.visibility = View.VISIBLE
-        tv_title.text = bean?.title
+        tv_title.text = title
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

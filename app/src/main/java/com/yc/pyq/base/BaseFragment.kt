@@ -48,7 +48,7 @@ abstract class BaseFragment: SwipeBackFragment(){
 
      var rootView: View? = null
 
-    protected var pagerNumber = 1//网络请求默认第一页
+     var pagerNumber = 1//网络请求默认第一页
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = layoutInflater.inflate(this.getLayoutId(), null, false)
